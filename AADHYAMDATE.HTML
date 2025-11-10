@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html></html>
+<head>
+<title>Growing Clock</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  #clock {
+    font-size: 16px;
+    transition: font-size 0.1s linear;
+  }
+</style>
+</head>
+<body>
+  <div id="clock"></div>
+  <script>
+    const clock = document.getElementById("clock");
+    let growing = true;
+    let fontSize = 16;
+
+    function updateClock() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString();
+      clock.textContent = timeString;
+    }
+
+    function animateFont() {
+      if (growing) {
+        fontSize += 2;
+        if (fontSize >= 200) growing = false;
+      } else {
+        fontSize -= 2;
+        if (fontSize <= 16) growing = true;
+      }
+      clock.style.fontSize = fontSize + "px";
+    }
+
+    setInterval(updateClock, 1000);
+    setInterval(animateFont, 6);
+  </script>
+</body>
+</html>
